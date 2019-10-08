@@ -20,7 +20,7 @@ export default class EditExercises extends Component {
   componentDidMount() {
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/exercises/${this.props.match.params.id}`
+        `${process.env.REACT_APP_BACKEND_URL}/exercises/${this.props.match.params.id}`
       )
       .then(res => {
         console.log(res.data.description);
@@ -33,7 +33,7 @@ export default class EditExercises extends Component {
       })
       .catch(err => console.log(`Error: ${err}`));
 
-    axios.get(`${process.env.REACT_APP_BASE_URL}/users/`).then(res => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/`).then(res => {
       this.setState({
         users: res.data.map(user => {
           return {
@@ -84,7 +84,7 @@ export default class EditExercises extends Component {
 
     axios
       .put(
-        `${process.env.REACT_APP_BASE_URL}/exercises/${this.props.match.params.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/exercises/${this.props.match.params.id}`,
         exercise
       )
       .then(res => {

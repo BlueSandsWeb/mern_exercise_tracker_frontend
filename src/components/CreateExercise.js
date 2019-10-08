@@ -18,7 +18,7 @@ export default class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_BASE_URL}/users/`).then(res => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/`).then(res => {
       this.setState({
         users: res.data.map(user => {
           return {
@@ -68,7 +68,7 @@ export default class CreateExercise extends Component {
     console.log(exercise);
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/exercises/add`, exercise)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/exercises/add`, exercise)
       .then(res => {
         console.log(res);
         this.props.history.push("/");
