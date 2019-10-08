@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Form, Header, Label, Button } from "semantic-ui-react";
 
@@ -21,7 +22,11 @@ export default class CreateUser extends Component {
     const user = {
       username: this.state.username
     };
-    console.log(user);
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/users/add`, user)
+      .then(res => {
+        console.log(res.data);
+      });
   };
 
   render() {

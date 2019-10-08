@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "datepicker": "0.0.0",
+    "dotenv": "^8.1.0",
     "react": "^16.10.2",
     "react-datepicker": "^2.9.6",
     "react-dom": "^16.10.2",

@@ -18,8 +18,8 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar />
         <Container>
-          <Navbar />
           <Route path="/" exact component={ExercisesList} />
           <Route path="/edit/:id" exact component={EditExercises} />
           <Route path="/create" exact component={CreateExercise} />

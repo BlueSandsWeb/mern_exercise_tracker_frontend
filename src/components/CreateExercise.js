@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
-import { Header, Form, Label, Button } from "semantic-ui-react";
+import axios from "axios";
+import { Header, Form, Label, Button, Select } from "semantic-ui-react";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateExercise extends Component {
@@ -16,9 +18,17 @@ export default class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      users: ["test user"],
-      username: "test user"
+    axios.get(`${process.env.REACT_APP_BASE_URL}/users/`).then(res => {
+      this.setState({
+        users: res.data.map(user => {
+          return {
+            key: user.username,
+            value: user.username,
+            text: user.username
+          };
+        }),
+        username: res.data[0].username
+      });
     });
   }
 
@@ -57,7 +67,12 @@ export default class CreateExercise extends Component {
 
     console.log(exercise);
 
-    this.props.history.push("/");
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/exercises/add`, exercise)
+      .then(res => {
+        console.log(res);
+        this.props.history.push("/");
+      });
   };
 
   render() {
@@ -67,11 +82,12 @@ export default class CreateExercise extends Component {
         <Form onSubmit={this.onSubmit}>
           <Form.Field>
             <Label pointing="below">Username</Label>
-            <input
-              type="text"
+            <Select
+              required
+              value={this.state.username}
               name="username"
-              placeholder="Username"
               onChange={e => this.onChangeUsername(e)}
+              options={this.state.users}
             />
           </Form.Field>
           <Form.Field>
