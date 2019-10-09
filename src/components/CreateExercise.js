@@ -33,8 +33,9 @@ export default class CreateExercise extends Component {
   }
 
   onChangeUsername = e => {
+    console.log(e.target);
     this.setState({
-      username: e.target.value
+      username: e.target.textContent
     });
   };
 
